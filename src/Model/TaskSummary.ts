@@ -36,6 +36,9 @@ export function getSummaryFromMarkdown(markdown: string, howToParseInternalLinks
   // Remove any leftover dates
   markdown = removeDates(markdown);
 
+  // Remove DayPlanner style times
+  markdown = removeTimes(markdown);
+
   // Trim whitespace
   markdown = trimWhitespace(markdown);
 
@@ -109,6 +112,11 @@ function removeDates(markdown: string): string {
   markdown = markdown.replace(regExp, '');
 
   return markdown;
+}
+
+function removeTimes(markdown: string): string {
+  const timeRegExp = /\s*\b(\d{1,2}(?::\d{2})?(?::\d{2})?\s*[ap]m|\d{1,2}(?::\d{2})?(?::\d{2})?)(?:\s*-\s*(\d{1,2}(?::\d{2})?(?::\d{2})?\s*[ap]m|\d{1,2}(?::\d{2})?(?::\d{2})?))?\b\s*/i;
+  return markdown.replace(timeRegExp, ' ');
 }
 
 function trimWhitespace(markdown: string): string {
