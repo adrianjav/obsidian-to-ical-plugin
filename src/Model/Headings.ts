@@ -17,7 +17,7 @@ export class Headings {
         return null;
       }
 
-      const line = markdownHeading.position.start.line ?? 0;
+      const line = markdownHeading.position?.start.line ?? 0;
 
       const year = parseInt(dateMatches?.groups?.year ?? '', 10);
       const monthIndex = parseInt(dateMatches?.groups?.month ?? '', 10) - 1;

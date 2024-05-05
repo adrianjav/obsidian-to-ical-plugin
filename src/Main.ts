@@ -51,7 +51,10 @@ export class Main {
         let headings;
         // If the user has enabled Day Planner format, then go and get all the Headings in this Markfile file
         if (settings.isDayPlannerPluginFormatEnabled) {
-          const markdownHeadings = this.app.metadataCache.getFileCache(file)?.headings ?? [];
+          // TODO @adrianjav: hotfix for using the title of the file, should be fix (see Headings.ts:20)
+          const markdownHeadings = [{'heading': file.name}].concat(
+            this.app.metadataCache.getFileCache(file)?.headings ?? []
+          );
 
           if (markdownHeadings.length) {
             headings = new Headings(markdownHeadings);
